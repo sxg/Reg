@@ -1,2 +1,8 @@
 # Reg
-CLI for 4D image registration of .mat file using FSL
+CLI for 4D image registration of .mat files using the FMRIB Software Library (FSL).
+
+# Installation
+```python
+git clone https://github.com/sxg/Reg.git
+pip install ./Reg
+```
