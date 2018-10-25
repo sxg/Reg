@@ -12,10 +12,12 @@ import hdf5storage
 
 @click.command()
 @click.argument("path")
+@click.option("-f", "--fnirt-path", default="/usr/local/fsl/bin/fnirt",
+              help="Path to FSL's FNIRT executable. Defaults to /usr/local/fsl/bin/fnirt.")
 @click.option("-n", "--name", default="regimages", help="Image dataset name.")
 @click.option("-a", "--anchors", default="1",
               help="Comma-separated list of anchor frames. Defaults to the first frame.")
-def cli(path, name, anchors):
+def cli(path, fnirt_path, name, anchors):
     """CLI that prints "Hello, world!"""
 
     # Parse and convert anchor indexes to Python indexes
