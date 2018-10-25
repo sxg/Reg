@@ -1,5 +1,5 @@
 """
-CLI for 4D image registration of .mat files using the FMRIB Software Library (FSL)
+CLI for 4D image registration of .mat files using the FMRIB Software Library (FSL).
 """
 
 import tempfile as tf
