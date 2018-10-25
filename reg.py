@@ -20,7 +20,7 @@ import hdf5storage
 @click.option("-a", "--anchors", default="1",
               help="Comma-separated list of anchor frames. Defaults to the first frame.")
 def cli(path, fnirt_path, output_path, name, anchors):
-    """CLI that prints "Hello, world!"""
+    """4D .mat image registration tool using the FMRIB Software Library's FNIRT tool."""
 
     # Parse and convert anchor indexes to Python indexes
     anchors = [int(x) - 1 for x in anchors.split(",")]
