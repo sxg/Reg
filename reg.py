@@ -5,6 +5,7 @@ CLI for 4D image registration of .mat files using the FMRIB Software Library (FS
 import tempfile as tf
 import os
 import sys
+import time
 import click
 import numpy as np
 import nibabel as nib
@@ -64,8 +65,12 @@ def reg_vols(fnirt_path, tmp_path, anchor, vol):
     anchor_path = os.path.join(tmp_path, "%d.nii" % (anchor + 1))
     vol_path = os.path.join(tmp_path, "%d.nii" % (vol + 1))
     out_path = os.path.join(tmp_path, "%d_reg.nii" % (vol + 1))
+    click.echo("Registering volume {0} to anchor {1}...".format((vol + 1), (anchor + 1)))
+    start = time.time()
     os.system("{0} --ref={1} --in={2} --iout={3}"
               .format(fnirt_path, anchor_path, vol_path, out_path))
+    end = time.time()
+    click.echo("Done. Elapsed time: {0}.".format(elapsed_time(start, end)))
 
 def load_reg_vols(tmp_path, anchors, shape):
     """Loads registered data into a numpy array."""
@@ -84,3 +89,9 @@ def mat_to_nii(img, tmp_path):
     for i in range(0, img.shape[3]):
         vol_nii = nib.Nifti1Image(np.squeeze(img[:, :, :, i]), np.eye(4))
         vol_nii.to_filename(os.path.join(tmp_path, "%d.nii" % (i + 1)))
+
+def elapsed_time(start, end):
+    """Create a pretty string with the elapsed time."""
+    hours, rem = divmod(end - start, 3600)
+    mins, secs = divmod(rem, 60)
+    return "{:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(mins), secs)
