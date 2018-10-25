@@ -37,7 +37,22 @@ def cli(path, fnirt_path, name, anchors):
         click.echo("Created temporary directory: {0}".format(tmp_path))
         # Convert .mat to .nii
         mat_to_nii(img, tmp_path)
+        # Register the data
+        reg_data(fnirt_path, tmp_path, anchors, img.shape[3])
         input("Press <Enter> to continue...")
+
+def reg_data(fnirt_path, tmp_path, anchors, n_vols):
+    """Registers a dataset using FNIRT."""
+    last_unreg = 0
+    for anchor in anchors:
+        for vol in range(last_unreg, anchor):
+            reg_vols(fnirt_path, tmp_path, anchor, vol)
+        last_unreg = anchor + 1
+
+        # Handle edge case where final volumes are registered to the last anchor
+        if anchor == anchors[-1] and anchor != (n_vols - 1):
+            for vol in range(last_unreg, n_vols):
+                reg_vols(fnirt_path, tmp_path, anchor, vol)
 
 def reg_vols(fnirt_path, tmp_path, anchor, vol):
     """Registers two volumes using FNIRT."""
