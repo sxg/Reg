@@ -39,6 +39,15 @@ def cli(path, fnirt_path, name, anchors):
         mat_to_nii(img, tmp_path)
         input("Press <Enter> to continue...")
 
+def reg_vols(fnirt_path, tmp_path, anchor, vol):
+    """Registers two volumes using FNIRT."""
+    anchor_path = os.path.join(tmp_path, "%d.nii" % (anchor + 1))
+    vol_path = os.path.join(tmp_path, "%d.nii" % (vol + 1))
+    out_path = os.path.join(tmp_path, "%d_reg.nii" % (vol + 1))
+    # Dry run. TO DO: actually execute FNIRT.
+    click.echo("{0} --ref={1} --in={2} --iout={3}"
+               .format(fnirt_path, anchor_path, vol_path, out_path))
+
 def mat_to_nii(img, tmp_path):
     """Save 4D .mat data as individual .nii volume files."""
     for i in range(0, img.shape[3]):
