@@ -10,6 +10,10 @@ setup(
     py_modules=["reg"],
     install_requires=[
         "Click",
+        "numpy",
+        "scipy",
+        "hdf5storage",
+        "nibabel"
     ],
     entry_points="""
         [console_scripts]
