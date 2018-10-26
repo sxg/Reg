@@ -29,7 +29,7 @@ def cli(path, fnirt_path, output_path, name, anchors):
     # Load the image file
     data = hdf5storage.loadmat(path)
     if not name in data: # Validate the dataset name
-        sys.exit('ImageName')
+        sys.exit('Image name not supplied.')
 
     # Load the dataset
     img = np.absolute(data[name])
