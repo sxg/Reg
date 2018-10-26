@@ -22,6 +22,7 @@ import hdf5storage
 @click.option("-n", "--name", required=True, help="Image dataset name.")
 @click.option("-a", "--anchors", default="1",
               help="Comma-separated list of anchor frames. Defaults to the first frame.")
+@click.version_option()
 def cli(path, fnirt_path, output_path, name, anchors):
     """4D .mat image registration tool using the FMRIB Software Library's FNIRT tool."""
 
@@ -51,6 +52,10 @@ def cli(path, fnirt_path, output_path, name, anchors):
         # Save the registered data
         hdf5storage.savemat(os.path.join(output_path, "registeredImages.mat"),
                             {"registeredImages": reg_img})
+
+"""
+Helpers
+"""
 
 def reg_data(fnirt_path, tmp_path, anchors, n_vols):
     """Registers a dataset using FNIRT."""
