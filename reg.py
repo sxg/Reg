@@ -40,7 +40,10 @@ def cli(path, fnirt_path, output_path, name, anchors):
         # Convert .mat to .nii
         mat_to_nii(img, tmp_path)
         # Register the data
+        start = time.time()
         reg_data(fnirt_path, tmp_path, anchors, img.shape[3])
+        end = time.time()
+        click.echo("Total elapsed time: {0}.".format(elapsed_time(start, end)))
         # Load the registered data
         reg_img = load_reg_vols(tmp_path, anchors, img.shape)
         # Save the registered data
