@@ -1,6 +1,8 @@
 """
 CLI for 4D image registration of .mat files using the FMRIB Software Library (FSL).
 """
+__version__ = "0.1.0"
+__version_info__ = (0, 1, 0)
 
 import tempfile as tf
 import os
