@@ -43,10 +43,7 @@ def cli(path, fnirt_path, output_path, name, anchors):
         # Convert .mat to .nii
         mat_to_nii(img, tmp_path)
         # Register the data
-        start = time.time()
         reg_data(fnirt_path, tmp_path, anchors, img.shape[3])
-        end = time.time()
-        click.echo("Total elapsed time: {0}.".format(elapsed_time(start, end)))
         # Load the registered data
         reg_img = load_reg_vols(tmp_path, anchors, img.shape)
         # Save the registered data
@@ -57,6 +54,9 @@ def cli(path, fnirt_path, output_path, name, anchors):
 
 def reg_data(fnirt_path, tmp_path, anchors, n_vols):
     """Registers a dataset using FNIRT."""
+
+    start = time.time()
+
     last_unreg = 0
     for anchor in anchors:
         for vol in range(last_unreg, anchor):
@@ -67,6 +67,9 @@ def reg_data(fnirt_path, tmp_path, anchors, n_vols):
         if anchor == anchors[-1] and anchor != (n_vols - 1):
             for vol in range(last_unreg, n_vols):
                 reg_vols(fnirt_path, tmp_path, anchor, vol)
+
+    end = time.time()
+    click.echo("Total elapsed time: {0}.".format(elapsed_time(start, end)))
 
 def reg_vols(fnirt_path, tmp_path, anchor, vol):
     """Registers two volumes using FNIRT."""
