@@ -55,11 +55,17 @@ def cli(path, fnirt_path, output_path, name, anchors):
 def reg_data(fnirt_path, tmp_path, anchors, n_vols):
     """Registers a dataset using FNIRT."""
 
+    n_reg = 0
+    n_to_reg = n_vols - len(anchors)
+    click.echo("Registering {0} of {1} volumes.".format(n_to_reg, n_vols))
     start = time.time()
 
     last_unreg = 0
     for anchor in anchors:
         for vol in range(last_unreg, anchor):
+            n_reg += 1
+            click.echo("[{0}/{1}] Registering volume {2} to anchor {3}..."
+                       .format(n_reg, n_to_reg, (vol + 1), (anchor + 1)))
             reg_vols(fnirt_path, tmp_path, anchor, vol)
         last_unreg = anchor + 1
 
@@ -76,7 +82,6 @@ def reg_vols(fnirt_path, tmp_path, anchor, vol):
     anchor_path = os.path.join(tmp_path, "%d.nii" % (anchor + 1))
     vol_path = os.path.join(tmp_path, "%d.nii" % (vol + 1))
     out_path = os.path.join(tmp_path, "%d_reg.nii" % (vol + 1))
-    click.echo("Registering volume {0} to anchor {1}...".format((vol + 1), (anchor + 1)))
     start = time.time()
     os.system("{0} --ref={1} --in={2} --iout={3}"
               .format(fnirt_path, anchor_path, vol_path, out_path))
