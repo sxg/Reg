@@ -53,9 +53,7 @@ def cli(path, fnirt_path, output_path, name, anchors):
         hdf5storage.savemat(os.path.join(output_path, "registeredImages.mat"),
                             {"registeredImages": reg_img})
 
-"""
-Helpers
-"""
+"""Helpers"""
 
 def reg_data(fnirt_path, tmp_path, anchors, n_vols):
     """Registers a dataset using FNIRT."""
