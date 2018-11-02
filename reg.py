@@ -25,6 +25,14 @@ import hdf5storage
 def cli(path, fnirt_path, output_path, name, anchors):
     """4D .mat image registration tool using the FMRIB Software Library's FNIRT tool."""
 
+    # Data validation
+    _, ext = os.path.splitext(output_path)
+    if ext != ".mat":
+        sys.exit('Need to specify an output path with .mat file name. You provided {0}.'
+                 .format(output_path))
+    if os.path.exists(output_path):
+        sys.exit('Output path {0} already exists.'.format(output_path))
+
     # Parse and convert anchor indexes to Python indexes
     anchors = [int(x) - 1 for x in anchors.split(",")]
 
