@@ -78,6 +78,9 @@ def reg_data(fnirt_path, tmp_path, anchors, n_vols):
         # Handle edge case where final volumes are registered to the last anchor
         if anchor == anchors[-1] and anchor != (n_vols - 1):
             for vol in range(last_unreg, n_vols):
+                n_reg += 1
+                click.echo("[{0}/{1}] Registering volume {2} to anchor {3}..."
+                           .format(n_reg, n_to_reg, (vol + 1), (anchor + 1)))
                 reg_vols(fnirt_path, tmp_path, anchor, vol)
 
     end = time.time()
