@@ -13,16 +13,16 @@ import hdf5storage
 
 @click.command()
 @click.argument("path")
+@click.option("-n", "--name", required=True, help="Image dataset name.")
 @click.option("-f", "--fnirt-path", default="/usr/local/fsl/bin/fnirt",
               help="Path to FSL's FNIRT executable. Defaults to /usr/local/fsl/bin/fnirt.")
 @click.option("-o", "--output-path", default="./registeredImages.mat",
               help=("Output path including file name and .mat extension for registered images."
                     " Defaults to current path with file name registeredImages.mat."))
-@click.option("-n", "--name", required=True, help="Image dataset name.")
 @click.option("-a", "--anchors", default="1",
               help="Comma-separated list of anchor frames. Defaults to the first frame.")
 @click.version_option()
-def cli(path, fnirt_path, output_path, name, anchors):
+def cli(path, name, fnirt_path, output_path, anchors):
     """4D .mat image registration tool using the FMRIB Software Library's FNIRT tool."""
 
     # Data validation
