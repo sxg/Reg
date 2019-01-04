@@ -42,8 +42,9 @@ def cli(path, name, fnirt_path, output_path, anchors):
         sys.exit('Dataset not found in file at {0}.'.format(path))
 
     # Load the dataset
-    img = np.absolute(data[name])
-    img = img / img.flatten().max() * 100 # FSL likes signal intensities 0–100
+    img = data[name]
+    # img = np.absolute(data[name])
+    # img = img / img.flatten().max() * 100 # FSL likes signal intensities 0–100
 
     # Create a temporary directory and do the work
     with tf.TemporaryDirectory() as tmp_path:
