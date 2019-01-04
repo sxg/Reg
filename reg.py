@@ -43,7 +43,7 @@ def cli(path, name, fnirt_path, output_path, anchors):
 
     # Load the dataset
     img = data[name]
-    # img = np.absolute(data[name])
+    img = np.absolute(data[name])
     # img = img / img.flatten().max() * 100 # FSL likes signal intensities 0–100
 
     # Create a temporary directory and do the work
