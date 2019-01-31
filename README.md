@@ -3,7 +3,7 @@ Reg is a tool to perform non-linear image registration on 4D volumes in `.mat` f
 
 # Installation
 ## Reg
-The latest version of Reg can be downloaded from [GitHub]. Alternatively, you can also download it from the terminal with the following command:
+The latest version of Reg can be downloaded here on GitHub. Alternatively, you can also download it from the terminal with the following command:
 ```console
 > git clone https://github.com/sxg/Reg.git
 ```
@@ -12,7 +12,7 @@ Once downloaded, navigate to the folder containing Reg, and run the following co
 > pip3 install ./Reg
 ```
 ## FSL
-Since Reg uses FSL, it must be installed as well. Specific installation instructions are available on [FSL’s website].
+Since Reg uses FSL, it must be installed as well. Specific installation instructions are available on [FSL’s website](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FslInstallation#Installing_FSL).
 
 # Usage
 Full details on all of Reg’s features and options are described in the help message:
